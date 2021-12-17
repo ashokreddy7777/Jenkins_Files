@@ -5,11 +5,13 @@ pipeline {
         string defaultValue: '', name: 'asa_billing_api_gke_appVersion'
 
         booleanParam defaultValue: false, description: '', name: 'config-api-gke'
-        string defaultValue: '', name: "config_api_gke_appVersion"
+        string defaultValue: '', name: 'config_api_gke_appVersion'
 
         choice choices: ['usis-ac-mc-dev-npe/mc-dev', 'usis-ac-mc-dev-npe/mc-qa'], description: '', name: 'projectIdClusterNamespaceApiProxy'
         choice choices: ['region/us-east1', 'region/us-west1'], description: '', name: 'clusterLocation'
-        //choice choices: ['Job-B', 'Job-C'], description: '', name: 'job'              
+        //choice choices: ['Job-B', 'Job-C'], description: '', name: 'job'  
+
+        string defaultValue: '', name: 'ticketNum'        
     }  
     stages {
         stage('api-deployment') {
