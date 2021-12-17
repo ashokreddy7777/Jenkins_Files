@@ -9,5 +9,11 @@ pipeline {
                 echo "DEBUG: parameter appVersion = ${appVersion}"
             }
         }
+        stage('testing Input') {
+            steps {
+                input message: 'UAT/Prod Deployments', parameters: [string(defaultValue: '', description: 'Enter a SNOW ticket number', name: 'ticketNum', trim: false)]
+                echo "deployed to production!"
+            }
+        }
     }
 }
