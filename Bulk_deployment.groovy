@@ -23,7 +23,8 @@ pipeline {
                             string(name:'projectIdClusterNamespaceApiProxy', value: "${projectIdClusterNamespaceApiProxy}"),
                             string(name:'ClusterLocation', value: "${clusterLocation}" ),
                             string(name:'artifactId', value:'asa-billing-api-gke'),
-                            string(name:'appVersion', value:"${asa_billing_api_gke_appVersion}")  
+                            string(name:'appVersion', value:"${asa_billing_api_gke_appVersion}")
+                            string(name: 'ticketNum', value:"${ticketNum}")
                         ]
                     }
                 }
