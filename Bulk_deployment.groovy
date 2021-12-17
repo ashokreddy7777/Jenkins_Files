@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         booleanParam defaultValue: false, description: '', name: 'pgp-encryption-util'
-        string defaultValue: '1.0.0', name: 'pgp_encryption_util_appVersion'
+        string defaultValue: '', name: 'pgp_encryption_util_appVersion'
 
         booleanParam defaultValue: false, description: '', name: 'pay-dev-util'
         string defaultValue: '', name: "pay_dev_util_appVersion"
