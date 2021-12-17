@@ -1,38 +1,38 @@
 pipeline {
     agent any
     parameters {
-        booleanParam defaultValue: false, description: '', name: 'pgp-encryption-util'
-        string defaultValue: '', name: 'pgp_encryption_util_appVersion'
+        booleanParam defaultValue: false, description: '', name: 'asa-billing-api-gke'
+        string defaultValue: '', name: 'asa_billing_api_gke_appVersion'
 
-        booleanParam defaultValue: false, description: '', name: 'pay-dev-util'
-        string defaultValue: '', name: "pay_dev_util_appVersion"
+        booleanParam defaultValue: false, description: '', name: 'config-api-gke'
+        string defaultValue: '', name: "config_api_gke_appVersion"
 
-        choice choices: ['us-a', 'us-b', 'us-c', 'us-d'], description: '', name: 'IdClusterNamespaceApi'
+        choice choices: ['usis-ac-mc-dev-npe/mc-dev', 'usis-ac-mc-dev-npe/mc-qa'], description: '', name: 'projectIdClusterNamespaceApiProxy'
         choice choices: ['region/us-east1', 'region/us-west1'], description: '', name: 'clusterLocation'
-        choice choices: ['Job-B', 'Job-C'], description: '', name: 'job'              
+        //choice choices: ['Job-B', 'Job-C'], description: '', name: 'job'              
     }  
     stages {
         stage('api-deployment') {
             parallel {
-                stage('pgp-encryption-util') {
-                    when { environment name: 'pgp-encryption-util', value: 'true' }
+                stage('asa-billing-api-gke') {
+                    when { environment name: 'asa-billing-api-gke', value: 'true' }
                     steps {
-                        build job:"${job}", parameters: [
-                            string(name:'artifactId', value:'pgp-encryption-util'),
-                            string(name:'appVersion', value:"${pgp_encryption_util_appVersion}"),
-                            string(name:'IdClusterNamespaceApi', value: "${IdClusterNamespaceApi}"),
-                            string(name:'ClusterLocation', value: "${clusterLocation}" )
+                        build job:'Job-B', parameters: [
+                            string(name:'projectIdClusterNamespaceApiProxy', value: "${projectIdClusterNamespaceApiProxy}"),
+                            string(name:'ClusterLocation', value: "${clusterLocation}" ),
+                            string(name:'artifactId', value:'asa-billing-api-gke'),
+                            string(name:'appVersion', value:"${asa_billing_api_gke_appVersion}")  
                         ]
                     }
                 }
-                stage('pay-dev-util') {
-                    when { environment name: 'pay-dev-util', value: 'true' }
+                stage('config-api-gke') {
+                    when { environment name: 'config-api-gke', value: 'true' }
                     steps {
-                        build job:"${job}", parameters: [
-                            string(name:'artifactId', value:'pay-dev-util'),
-                            string(name:'appVersion', value:"${pay_dev_util_appVersion}"),
-                            string(name:'IdClusterNamespaceApi', value: "${IdClusterNamespaceApi}"),
-                            string(name:'ClusterLocation', value: "${clusterLocation}")
+                        build job:'Job-B', parameters: [
+                            string(name:'projectIdClusterNamespaceApiProxy', value: "${projectIdClusterNamespaceApiProxy}"),
+                            string(name:'ClusterLocation', value: "${clusterLocation}"),
+                            string(name:'artifactId', value:'config-api-gke'),
+                            string(name:'appVersion', value:"${config_api_gke_appVersion}")                            
                         ]
                     }
                 }
