@@ -11,7 +11,7 @@ pipeline {
         }
         stage('testing Input') {
             steps {
-                input message: 'UAT/Prod Deployments', parameters: [string(defaultValue: '', description: 'Enter a SNOW ticket number', name: 'ticketNum', trim: false)]
+                input message: 'UAT/Prod Deployments', parameters: [string(defaultValue: "${ticketNum}", description: 'Enter a SNOW ticket number', name: 'ticketNum', trim: false)]
                 echo "deployed to production!"
             }
         }
